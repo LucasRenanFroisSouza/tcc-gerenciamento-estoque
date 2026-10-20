@@ -71,13 +71,16 @@ with app.app_context():
         db.session.rollback()
 
     # Insere o adminstrador caso nao exista.
-    if not Usuario.query.filter_by(email="admin@unesp.com").first():
+    admin_email = os.getenv("ADMIN_EMAIL")
+    admin_password = os.getenv("ADMIN_PASSWORD")
+
+    if not Usuario.query.filter_by(email=admin_email).first():
         master = Usuario(
             nome="Administrador",
-            email="admin@unesp.com",
-            senha=generate_password_hash("admin"),
+            email=admin_email,
+            senha=generate_password_hash(admin_password),
             administrador=True
-        )
+    )
         db.session.add(master)
         db.session.commit()
 
