@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fármacos</title>
+</head>
+
+    <link rel="stylesheet" href="../../static/css/style.css">
+</head>
+
+<body class="dashboard-layout">
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <header>
+        <img src="../../static/images/logo_unesp.png" alt="UNESP">
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="estoque.html" class="nav-link">Estoque (Lotes)</a>
+        <a href="movimentacoes.html" class="nav-link">Movimentações</a>
+        <a href="farmacos.html" class="nav-link active-page">Fármacos</a>
+        <a href="fornecedores.html" class="nav-link">Fornecedores</a>
+        <a href="index.html" class="sair">Sair</a>
+    </header>
+    <div class="content-wrapper">
+        <main>
+            <div class="page-header">
+                <h1>Fármacos</h1>
+                <button class="btn btn-primary" onclick="openModal('modal-farmaco')">+ Novo Fármaco</button>
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Fornecedor</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </main>
+
+        <footer>Medicina Nuclear UNESP | Desemvolvido por SESI</footer>
+    </div>
+    <!-- Modal Fármaco -->
+    <div id="modal-farmaco" class="modal-overlay hidden">
+        <div class="modal-card">
+            <h3>Novo Fármaco</h3>
+            <div class="input-group" style="margin-top: 15px;">
+                <label>Nome do Fármaco</label>
+                <input type="text" id="in-farm-nome" placeholder="Ex: Glicose (18F)">
+            </div>
+            <div class="input-group">
+                <label>Fornecedor</label>
+                <select id="sel-farm-forn">
+                    <option value="">Selecione um fornecedor...</option>
+                </select>
+            </div>
+            <div style="text-align: right; margin-top: 20px;">
+                <button class="btn btn-outline" onclick="closeModals()">Cancelar</button>
+                <button class="btn btn-primary" id="btn-save-farm">Salvar Fármaco</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+        }
+
+        function closeModals() {
+            const modals = document.querySelectorAll('.modal-overlay');
+            modals.forEach(modal => modal.classList.add('hidden'));
+        }
+
+        // Fechar modal ao clicar fora dele
+        window.onclick = function (event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                closeModals();
+            }
+        }
+
+        //Menu Mobile
+        const menuToggle = document.getElementById('menuToggle');
+        const header = document.querySelector('header');
+        if (menuToggle && header) {
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                header.classList.toggle('open');
+            });
+
+            // Fecha o menu ao clicar fora dele no mobile
+            document.addEventListener('click', (e) => {
+                if (header.classList.contains('open') && !header.contains(e.target) && e.target !== menuToggle) {
+                    header.classList.remove('open');
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

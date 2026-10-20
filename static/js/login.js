@@ -1,3 +1,14 @@
+const params = new URLSearchParams(window.location.search)
+const mensagem = document.getElementById("mensagem")
+
+if (params.get("msg")) {
+    mensagem.innerHTML = `
+        <div style="color:#b91c1c; background:#fee2e2; border:1px solid #fca5a5; padding:10px; border-radius:8px; margin-top:10px;">
+            ${params.get("msg")}
+        </div>
+    `
+}
+
 document.getElementById("login-form").addEventListener("submit", login_user)
 
 async function login_user(event) {

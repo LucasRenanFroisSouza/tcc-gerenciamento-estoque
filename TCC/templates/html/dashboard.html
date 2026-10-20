@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/css/style.css">
+</head>
+
+<body class="dashboard-layout">
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <header>
+        <img src="../../static/images/logo_unesp.png" alt="UNESP">
+        <a href="dashboard.html" class="nav-link active-page">Dashboard</a>
+        <a href="estoque.html" class="nav-link">Estoque (Lotes)</a>
+        <a href="movimentacoes.html" class="nav-link">Movimentações</a>
+        <a href="farmacos.html" class="nav-link">Fármacos</a>
+        <a href="fornecedores.html" class="nav-link">Fornecedores</a>
+        <a href="index.html" class="sair">Sair</a>
+    </header>
+    <div class="content-wrapper">
+        <main>
+            <div class="page-header">
+                <h1>Visão Geral</h1>
+            </div>
+            <div class="card-grid">
+                <div class="card">
+                    <h4>Lotes Ativos</h4>
+                    <h2>0</h2>
+                </div>
+                <div class="card">
+                    <h4>Fármacos</h4>
+                    <h2>0</h2>
+                </div>
+                <div class="card">
+                    <h4>Movimentações</h4>
+                    <h2>0</h2>
+                </div>
+            </div>
+        </main>
+
+        <footer>Medicina Nuclear UNESP | Desemvolvido por SESI</footer>
+    </div>
+    <script>
+        // Menu Mobile
+        const menuToggle = document.getElementById('menuToggle');
+        const header = document.querySelector('header');
+        if (menuToggle && header) {
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                header.classList.toggle('open');
+            });
+
+            // Fecha o menu ao clicar fora dele no mobile
+            document.addEventListener('click', (e) => {
+                if (header.classList.contains('open') && !header.contains(e.target) && e.target !== menuToggle) {
+                    header.classList.remove('open');
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

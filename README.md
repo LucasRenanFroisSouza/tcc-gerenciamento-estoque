@@ -19,6 +19,7 @@ Projeto de TCC em desenvolvimento para gerenciamento de estoque da Medicina Nucl
 - Cadastro de fornecedores
 - Cadastro de fármacos
 - Controle de lotes
+- Exclusão lógica de fármacos e lotes, com opção de visualizar e reativar itens inativos
 - Controle de estoque
 - Movimentações
 

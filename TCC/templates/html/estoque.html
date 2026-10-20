@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque Lotes</title>
+</head>
+
+    <link rel="stylesheet" href="../../static/css/style.css">
+</head>
+
+<body class="dashboard-layout">
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <header>
+        <img src="../../static/images/logo_unesp.png" alt="UNESP">
+        <a href="dashboard.html" class="nav-link">Dashboard</a>
+        <a href="estoque.html" class="nav-link active-page">Estoque (Lotes)</a>
+        <a href="movimentacoes.html" class="nav-link">Movimentações</a>
+        <a href="farmacos.html" class="nav-link">Fármacos</a>
+        <a href="fornecedores.html" class="nav-link">Fornecedores</a>
+        <a href="index.html" class="sair">Sair</a>
+    </header>
+
+    <div class="content-wrapper">
+        <main>
+            <div>
+                <h1>Gestão de Lotes</h1>
+                <button class="btn btn-primary" onclick="openModal('modal-lote')">+ Novo Lote</button>
+            </div>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Fármaco</th>
+                            <th>Lote</th>
+                            <th>Validade</th>
+                            <th>Qtd Atual</th>
+                            <th>Capacidade</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </main>
+
+        <footer>Medicina Nuclear UNESP | Desemvolvido por SESI</footer>
+    </div>
+    <!-- Modal Lote -->
+    <div id="modal-lote" class="modal-overlay hidden">
+        <div class="modal-card">
+            <h3>Novo Lote</h3>
+            <div class="input-group" style="margin-top: 15px;">
+                <label>Fármaco</label>
+                <select id="sel-lote-farmaco">
+                    <option value="">Selecione um fármaco...</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Identificação do Lote</label>
+                <input type="text" id="in-lote-nome">
+            </div>
+            <div class="input-group">
+                <label>Data de Validade</label>
+                <input type="datetime-local" id="in-lote-val">
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <div class="input-group" style="flex: 1;"><label>Qtd Inicial</label><input type="number"
+                        id="in-lote-qtd"></div>
+                <div class="input-group" style="flex: 1;"><label>Capacidade Max</label><input type="number"
+                        id="in-lote-cap"></div>
+            </div>
+            <div style="text-align: right; margin-top: 20px;">
+                <button class="btn btn-outline" onclick="closeModals()">Cancelar</button>
+                <button class="btn btn-primary" id="btn-save-lote">Salvar Lote</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+        }
+
+        function closeModals() {
+            const modals = document.querySelectorAll('.modal-overlay');
+            modals.forEach(modal => modal.classList.add('hidden'));
+        }
+
+        // Fechar modal ao clicar fora dele
+        window.onclick = function (event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                closeModals();
+            }
+        }
+
+        // Menu Mobile
+        const menuToggle = document.getElementById('menuToggle');
+        const header = document.querySelector('header');
+        if (menuToggle && header) {
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                header.classList.toggle('open');
+            });
+
+            // Fecha o menu ao clicar fora dele no mobile
+            document.addEventListener('click', (e) => {
+                if (header.classList.contains('open') && !header.contains(e.target) && e.target !== menuToggle) {
+                    header.classList.remove('open');
+                }
+            });
+        }
+    </script>
+</body>
+
+
+</html>
