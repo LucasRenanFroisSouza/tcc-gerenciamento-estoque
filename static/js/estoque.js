@@ -230,7 +230,17 @@ async function listar_lotes() {
 
         dados.forEach(function (lote) {
 
-            const statusTexto = lote.status ? "Ativo" : "Inativo";
+            const statusTexto = lote.status
+                ? lote.status_validade
+                : "Inativo";
+            const statusClasse = lote.status_validade === "vencido"
+                ? "badge-danger"
+                : lote.status_validade === "Quase vencendo"
+                    ? "badge-warning"
+                    : "badge-ok";
+            const statusHtml = lote.status
+                ? `<span class="badge ${statusClasse}">${statusTexto}</span>`
+                : statusTexto;
             const acoes = lote.status
                 ? `
                     <button class="btn btn-outline" onclick="editar_lote(${lote.id})">Editar</button>
@@ -270,7 +280,7 @@ async function listar_lotes() {
                     </td>
 
                     <td>
-                        ${statusTexto}
+                        ${statusHtml}
                     </td>
 
                     <td>

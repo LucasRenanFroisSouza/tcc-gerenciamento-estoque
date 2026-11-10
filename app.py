@@ -53,7 +53,7 @@ def obter_status_validade(data_validade, hoje=None):
     dias_para_vencer = (data_validade - hoje).days
 
     if dias_para_vencer < 0:
-        return "Vencido"
+        return "vencido"
     if dias_para_vencer <= 10:
         return "Quase vencendo"
     return "Ativo"
@@ -409,7 +409,7 @@ def listar_farmacos():
             status_validade = (
                 obter_status_validade(lote_atual.data_validade, hoje)
                 if lote_atual
-                else ("Vencido" if lotes_ativos else "Sem lote")
+                else ("vencido" if lotes_ativos else "Sem lote")
             )
 
             resultado.append({
